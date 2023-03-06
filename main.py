@@ -1,15 +1,4 @@
-def get_todos(filepath="files/todos.txt"):
-    """ Read the to-do file and return it's content. """
-    with open(filepath, "r") as file_todos:
-        result = file_todos.readlines()
-    return result
-
-
-def write_todos(todos_to_write, filepath="files/todos.txt"):
-    """ Open the to-do file and write content. """
-    with open(filepath, "w") as file_todos:
-        file_todos.writelines(todos_to_write)
-
+from modules import functions
 
 while True:
     filepath_todo = "files/todos.txt"
@@ -20,14 +9,14 @@ while True:
     if user_action.startswith('add') or user_action.startswith('new'):
         todo = user_action[4:]
 
-        todos = get_todos()
+        todos = functions.get_todos()
         todos.append(todo + '\n')
 
-        write_todos(todos)
+        functions.write_todos(todos)
 
     elif user_action.startswith('show'):
 
-        todos = get_todos()
+        todos = functions.get_todos()
 
         # list comprehension
         # new_todos = [item.strip('\n').title() for item in todos]
@@ -42,13 +31,13 @@ while True:
             number = int(user_action[5:])
             number = number - 1
 
-            todos = get_todos()
+            todos = functions.get_todos()
 
             existing_todo = todos[number]
             edited_todo = input("Enter the new value for this todo: ") + "\n"
             todos[number] = edited_todo
 
-            write_todos(todos)
+            functions.write_todos(todos)
 
         except ValueError:
             print("Invalid command!")
@@ -62,12 +51,12 @@ while True:
             number = int(user_action[9:])
             number = number - 1
 
-            todos = get_todos()
+            todos = functions.get_todos()
 
             todo_to_remove = todos[number].strip('\n').title()
             todos.pop(number)
             print(f"Todo {todo_to_remove} completed!")
-            write_todos(todos)
+            functions.write_todos(todos)
 
         except ValueError:
             print("Invalid command")

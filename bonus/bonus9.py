@@ -1,19 +1,9 @@
-
-def parse(feet_inches):
-    values = feet_inches.split(" ")
-    feet_local = float(values[0])
-    inches_local = float(values[1])
-    return {"feet": feet_local, "inches": inches_local}
-
-
-def convert(feet_local, inches_local):
-    meters = feet_local * 0.3048 + inches_local * 0.0254
-    return meters
-
+import parsers
+from bonus.converters import convert
 
 user_input = input("Enter feet and inches: ")
 
-parsed_input = parse(user_input)
+parsed_input = parsers.parse(user_input)
 feet = parsed_input["feet"]
 inches = parsed_input["inches"]
 

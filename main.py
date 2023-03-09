@@ -1,4 +1,10 @@
 from modules import functions
+# See https://docs.python.org/3/py-modindex.html
+import time
+
+# See https://www.w3schools.com/python/gloss_python_date_format_codes.asp
+now = time.strftime("%A, %b %d, %Y %H:%M:%S")
+print(f"It is {now}")
 
 while True:
     filepath_todo = "files/todos.txt"

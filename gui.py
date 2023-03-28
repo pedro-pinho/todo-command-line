@@ -1,6 +1,5 @@
 from modules import functions
 import PySimpleGUI as sg
-import time
 
 sg.theme('DarkTeal2')   # Add a touch of color
 todos = functions.get_todos()
@@ -9,10 +8,11 @@ todos = functions.get_todos()
 input_text = sg.InputText(tooltip="Enter to-do", key='todo', do_not_clear=False, size=46)
 list_box = sg.Listbox(values=todos, key='todos', size=(45, 10), enable_events=True)
 clock_text = sg.Text('', key='clock')
-layout = [[clock_text],
-          [sg.Text('Type in a to-do')],
-          [input_text, sg.Button('Add')],
-          [list_box, sg.Button('Edit'), sg.Button('Complete')],
+add_button = sg.Button(size=2, key="Add", image_source="files/add.png", tooltip="Add Todo")
+complete_button = sg.Button(key="Complete", image_source="files/complete.png", tooltip="Complete Todo")
+layout = [[sg.Text('Type in a to-do')],
+          [input_text, add_button],
+          [list_box, sg.Button('Edit'), complete_button],
           [sg.Button('Exit')]]
 
 # Create the Window
@@ -22,10 +22,7 @@ window = sg.Window('My To-Do App',
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     # Display the window
-    event, values = window.read(timeout=200)
-
-    now = time.strftime("%b %d, %Y %H:%M:%S")
-    window['clock'].update(value=now)
+    event, values = window.read()
 
     if event == sg.WIN_CLOSED or event == 'Exit':  # if user closes window or clicks cancel
         break

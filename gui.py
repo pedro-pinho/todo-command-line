@@ -1,5 +1,10 @@
 from modules import functions
 import PySimpleGUI as sg
+import os
+
+if not os.path.exists("files/todos.txt"):
+    with open("files/todos.txt", "w") as file:
+        pass
 
 sg.theme('DarkTeal2')   # Add a touch of color
 todos = functions.get_todos()
